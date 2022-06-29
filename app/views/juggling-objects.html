@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" action="/check-answers" method="post">
+
+        {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+        {{ govukCheckboxes({
+          idPrefix: "juggling-objects",
+          name: "juggling-objects",
+          fieldset: {
+            legend: {
+              text: "Juggling objects?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--xl"
+            }
+          },
+          items: [
+            {
+              value: "Clubs",
+              text: "Clubs",
+              checked: checked("juggling-objects", "Clubs")
+            },
+            {
+              value: "Rings",
+              text: "Rings",
+              checked: checked("juggling-objects", "Rings")
+            },
+            {
+              value: "Knives",
+              text: "Knives",
+              checked: checked("juggling-objects", "Knives")
+            },
+            {
+              value: "Fruits",
+              text: "Fruits",
+              checked: checked("juggling-objects", "Fruits"),
+              hint: {
+                text: "Oranges, satsumas, pineapples, berries, grapefruit and more"
+              }
+            },
+            {
+              value: "Vegetables",
+              text: "Vegetables",
+              checked: checked("juggling-objects", "Vegetables"),
+              hint: {
+                text: "Aubergines, carrots, lettuces, tomatoes, cauliflowers etc"
+              }
+            }
+          ]
+        }) }}
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

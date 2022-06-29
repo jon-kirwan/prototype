@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        You can't apply for a new juggling license
+      </h1>
+
+      {% if data['can-you-juggle'] != 'yes' %}
+        <h2 class="govuk-heading-l">
+            Because you can't juggle
+        </h2>
+      {% endif %}
+
+      {% if data['how-many-balls'] == '1 or 2' %}
+        <h2 class="govuk-heading-l">
+          Because you can only juggle 1 or 2 balls
+        </h2>
+      {% endif %}
+
+      <p class="govuk-body-m">
+        <a href="/" class="govuk-link">Start again</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
