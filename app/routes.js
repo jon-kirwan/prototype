@@ -1,3 +1,6 @@
+var NotifyClient = require("notifications-node-client").NotifyClient,
+  notify = new NotifyClient(process.env.NOTIFYAPIKEY);
+
 const express = require("express");
 const { pathExists } = require("fs-extra");
 const router = express.Router();
@@ -16,8 +19,8 @@ router.post("/juggling-balls", function (req, res) {
 
   let fail = {
     failed: true,
-    failedMessage: "it failed"
-  }
+    failedMessage: "it failed",
+  };
 
   if (req.path.includes("juggling-balls")) {
     console.warn(req.session.data["can-you-juggle"]);
@@ -42,6 +45,22 @@ router.post("/juggling-balls-answer", function (req, res) {
       res.redirect("/ineligible");
     }
   }
+});
+
+// The URL here needs to match the URL of the page that the user is on
+// when they type in their email address
+router.post("/send-email", function (req, res) {
+  notify.sendEmail(
+    "a8c0632f-ede8-446c-9c95-00f8ff57128a",
+    req.body.emailAddress,
+    {
+      personalisation: {
+        emailAddress: req.body.emailAddress,
+      },
+    }
+  );
+
+  res.redirect("/confirmation");
 });
 
 module.exports = router;

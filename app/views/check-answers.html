@@ -19,22 +19,26 @@
       </h1>
 
       {% if data["can-you-juggle"] == "yes" %}
-        <h2 class="govuk-heading-m">
+        <h2 class="govuk-body govuk-!-font-size-27 govuk-!-font-weight-bold">
           You can apply for a juggling licence and learn to juggle
         </h2>
     
         <p class="govuk-body-m">
-          Pellentesque et rutrum nunc. Proin nisi lacus, pulvinar vitae pharetra at, facilisis a enim
+          Based on your answers you can apply for a juggling licence and learn to juggle. To apply for a pro licence you need to be able to juggle 5 different types of objects.
+        </p>
+
+        <p>
+          You must obey the rules for learning to juggle.
         </p>
       {% endif %}
     
       {% if data["juggling-objects"].length == "5" %}
-        <h2 class="govuk-heading-m">
+        <h2 class="govuk-body govuk-!-font-size-27 govuk-!-font-weight-bold">
           You can apply for a pro juggling licence
         </h2>
     
         <p class="govuk-body-m">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          You can apply for this type of licence because you have answered that you can juggle {{ data['juggling-objects'].length }} different types of objects
         </p>
       {% endif %}
 
@@ -97,15 +101,30 @@
             </a>
           </dd>
         </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Your email address
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['emailAddress'] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a href="/email-address-page">
+              Change
+              <span class="govuk-visually-hidden"> your email address</span>
+            </a>
+          </dd>
+        </div>
       </dl>
 
       <h2 class="govuk-heading-m">Now send your application</h2>
 
       <p>By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.</p>
 
-      <form action="/confirmation" method="post" novalidate>
+      <form action="/send-email" method="post" novalidate>
 
-        <input type="hidden" name="answers-checked" value="true">
+        <!-- <input type="hidden" name="answers-checked" value="true"> -->
+        <input type="hidden" name="emailAddress" value="{{ data['emailAddress'] | safe }}">
 
         <button type="submit" class="govuk-button" data-module="govuk-button">
           Accept and send

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Email – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" method="post" action="/check-answers">
+
+        {{ govukInput({
+          label: {
+            text: "What is your email address?",
+            isPageHeading: true,
+            classes: "govuk-label--l"
+          },
+          id: "emailAddress",
+          name: "emailAddress",
+          type: "email",
+          autocomplete: "email",
+          spellcheck: false,
+          value: data['emailAddress']
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        })}}
+
+      </form>
+    </div>
+  </div>
+{% endblock %}
